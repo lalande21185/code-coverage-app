@@ -1,6 +1,4 @@
 {
-  "name": "bitbucket-forge-hello-world-app",
-  "version": "1.0.0",
   "private": true,
   "devDependencies": {
     "uvu": "^0.5.6"
