@@ -1,0 +1,47 @@
+modules:
+  bitbucket:repoMainMenuPage:
+    - key: main-menu-page
+      resource: main
+      resolver:
+        function: resolver
+      render: native
+      title: PHP Test Coverage
+  bitbucket:repoPullRequestCard:
+    - key: pull-request-card
+      resource: pull-request
+      resolver:
+        function: resolver
+      render: native
+      title: PHP Test Coverage
+  function:
+    - key: resolver
+      handler: index.handler
+    - key: store-coverage
+      handler: web-triggers/index.storeCoverage
+  webtrigger:
+    - key: store-coverage-web-trigger
+      function: store-coverage
+      response:
+        type: static
+        outputs:
+          - key: status-ok
+            statusCode: 200
+          - key: status-error-bad-request
+            statusCode: 400
+          - key: status-error-unknown
+            statusCode: 500
+resources:
+  - key: main
+    path: src/frontend/main-menu-page.jsx
+  - key: pull-request
+    path: src/frontend/pull-request-card.jsx
+permissions:
+  scopes:
+    - read:repository:bitbucket
+    - read:pullrequest:bitbucket
+    - storage:app
+app:
+  runtime:
+    name: nodejs22.x
+  id: ari:cloud:ecosystem::app/94434314-49f7-40e9-b559-e1e17b46da7b
+
